@@ -4,6 +4,7 @@ import 'package:api_test/screens/signup_screen.dart';
 import 'package:api_test/utils/common_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class OnboardingScreen extends StatelessWidget {
   final OnboardingController controller = Get.put(OnboardingController());
@@ -27,7 +28,7 @@ class OnboardingScreen extends StatelessWidget {
                   color: page.bgColor,
                   child: Column(
                     children: [
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 36),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.5 - 19,
                         child: Align(
@@ -66,10 +67,21 @@ class OnboardingScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(height: 31),
-                        customText(text: page.title),
+                        customText(
+                            text: page.title,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            fontColor: const Color(0xff000000)),
                         const SizedBox(height: 40),
-                        customText(text: page.description),
-                        const SizedBox(height: 27),
+                        SizedBox(
+                          height: 108,
+                          child: customText(
+                            text: page.description,
+                            fontSize: 14,
+                            fontColor: const Color(0xff261C12),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                         Obx(
                           () => Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -84,9 +96,7 @@ class OnboardingScreen extends StatelessWidget {
                                     : 7,
                                 height: 7,
                                 decoration: BoxDecoration(
-                                  color: controller.currentPage.value == index
-                                      ? Colors.blue
-                                      : Colors.grey,
+                                  color: const Color(0xff261C12),
                                   borderRadius: BorderRadius.circular(46),
                                 ),
                               ),
@@ -103,13 +113,22 @@ class OnboardingScreen extends StatelessWidget {
                           onPressed: () => Get.to(() => SignupScreen()),
                           child: customText(
                             text: 'Join the movement!',
+                            fontSize: 18,
+                            fontColor: const Color(0xffFFFFFF),
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         const SizedBox(height: 16),
                         TextButton(
-                          child: const Text('Login',
-                              style: TextStyle(
-                                  fontSize: 14, color: Color(0xff261C12))),
+                          child: Text(
+                            'Login',
+                            style: GoogleFonts.beVietnamPro(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xff261C12),
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
                           onPressed: () => Get.to(() => LoginScreen()),
                         ),
                       ],

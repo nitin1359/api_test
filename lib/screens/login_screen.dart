@@ -1,4 +1,6 @@
 import 'package:api_test/controllers/auth_controller.dart';
+import 'package:api_test/screens/signup_screen.dart';
+import 'package:api_test/utils/common_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,29 +14,43 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 30.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
+            const SizedBox(height: 36),
+            customText(
+              text: 'FarmerEats',
+              fontColor: const Color(0xff000000),
             ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: passwordController,
-              decoration: const InputDecoration(labelText: 'Password'),
-              obscureText: true,
+            const SizedBox(height: 90),
+            customText(
+              text: 'Welcome back!',
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 32),
-            ElevatedButton(
-              child: const Text('Login'),
-              onPressed: () {
-                authController.login(emailController.text, passwordController.text);
-              },
+            const SizedBox(height: 24),
+            Row(
+              children: [
+                customText(
+                  text: 'New here?',
+                  fontColor: const Color(0xff000000).withOpacity(0.3),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+                TextButton(
+                  onPressed: () => Get.to(() => SignupScreen()),
+                  child: customText(
+                    text: 'Create account',
+                    fontColor: const Color(0xffD5715B),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
             ),
+            const SizedBox(height: 72),
           ],
         ),
       ),

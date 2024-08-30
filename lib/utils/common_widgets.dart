@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Widget customText({
   required String text,
   fontColor = const Color(0xff261C12),
-  double? size = 16,
-  FontWeight? weight = FontWeight.w400,
-  TextAlign? align = TextAlign.center,
+  double? fontSize = 16,
+  FontWeight? fontWeight = FontWeight.w400,
+  TextAlign? textAlign = TextAlign.center,
 }) {
   return Text(
     text,
-    textAlign: align,
-    style: TextStyle(
-      
+    textAlign: textAlign,
+    style: GoogleFonts.beVietnamPro(
       color: fontColor,
-      fontSize: size,
-      fontWeight: FontWeight.bold,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
     ),
   );
 }

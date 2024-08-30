@@ -18,9 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Api Test',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        textTheme: GoogleFonts.beVietnamProTextTheme(
-          Theme.of(context).textTheme,
-        ),
+        textTheme: GoogleFonts.beVietnamProTextTheme(),
       ),
       home: OnboardingScreen(),
       initialBinding: BindingsBuilder(() {
