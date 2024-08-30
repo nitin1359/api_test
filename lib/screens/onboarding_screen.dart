@@ -1,6 +1,7 @@
 import 'package:api_test/controllers/onboarding_controller.dart';
 import 'package:api_test/screens/login_screen.dart';
 import 'package:api_test/screens/signup_screen.dart';
+import 'package:api_test/utils/common_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,69 +13,80 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Expanded(
-        child: PageView.builder(
-          itemCount: controller.pages.length,
-          onPageChanged: (index) => controller.currentPage.value = index,
-          itemBuilder: (context, index) {
-            final page = controller.pages[index];
-            return Stack(
-              children: [
-                Container(
+      body: Stack(
+        children: [
+          Positioned(
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Obx(
+              () {
+                final page = controller.pages[controller.currentPage.value];
+                return Container(
                   color: page.bgColor,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      child: Image.asset(
-                        page.imageAsset,
+                      height: MediaQuery.of(context).size.height * 0.5 - 19,
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: Image.asset(
+                          page.imageAsset,
+                          height: 370,
+                        ),
                       ),
                     ),
                   ),
+                );
+              },
+            ),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.5,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(52),
+                  topRight: Radius.circular(52),
                 ),
-                Positioned(
-                  top: MediaQuery.of(context).size.height * 0.5,
-                  left: 0,
-                  bottom: 0,
-                  right: 0,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(52),
-                        topRight: Radius.circular(52),
-                      ),
-                    ),
+              ),
+              child: Obx(
+                () {
+                  final page = controller.pages[controller.currentPage.value];
+
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          page.title,
-                          style: const TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          page.description,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                        const SizedBox(height: 32),
+                        const SizedBox(height: 31),
+                        customText(text: page.title),
+                        const SizedBox(height: 40),
+                        customText(text: page.description),
+                        const SizedBox(height: 27),
                         Obx(
                           () => Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: List.generate(
                               controller.pages.length,
-                              (index) => Container(
+                              (index) => AnimatedContainer(
+                                duration: const Duration(milliseconds: 300),
                                 margin:
-                                    const EdgeInsets.symmetric(horizontal: 5),
-                                width: 12,
-                                height: 12,
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                width: controller.currentPage.value == index
+                                    ? 16.33
+                                    : 7,
+                                height: 7,
                                 decoration: BoxDecoration(
                                   color: controller.currentPage.value == index
                                       ? Colors.blue
                                       : Colors.grey,
-                                  shape: BoxShape.circle,
+                                  borderRadius: BorderRadius.circular(46),
                                 ),
                               ),
                             ),
@@ -88,9 +100,8 @@ class OnboardingScreen extends StatelessWidget {
                                 horizontal: 32, vertical: 16),
                           ),
                           onPressed: () => Get.to(() => SignupScreen()),
-                          child: const Text(
-                            'Join the movement!',
-                            style: TextStyle(fontSize: 18, color: Colors.white),
+                          child: customText(
+                            text: 'Join the movement!',
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -102,12 +113,12 @@ class OnboardingScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
