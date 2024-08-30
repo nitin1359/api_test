@@ -25,18 +25,19 @@ class OnboardingScreen extends StatelessWidget {
                 final page = controller.pages[controller.currentPage.value];
                 return Container(
                   color: page.bgColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.5 - 19,
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Image.asset(
-                          page.imageAsset,
-                          height: 370,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 32),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.5 - 19,
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child: Image.asset(
+                            page.imageAsset,
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                 );
               },
@@ -60,7 +61,7 @@ class OnboardingScreen extends StatelessWidget {
                   final page = controller.pages[controller.currentPage.value];
 
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
